@@ -5,8 +5,11 @@
     <title>Sign In</title>
   </head>
   <body>
-    <%- include('./partials/navbar') %>
-
+    <%- include('./partials/navbar') %> <% if (locals.error) { %>
+      <div class="alert alert-danger container my-3" role="alert">
+        <%= locals.error %>
+      </div>
+    <% } %>
     <div class="container">
       <form method="post" action="/user/signin">
         <div class="mb-3">
