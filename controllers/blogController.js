@@ -5,40 +5,52 @@ const renderAddBlog = (req, res) => {
 };
 
 const createNewBlog = async (req, res) => {
-  const { title, body } = req.body;
-  await BlogModel.create({
-    title,
-    body,
-    createdBy: req.user._id,
-    coverImageUrl: `uploads/${req.file.filename}`,
-  });
+  try {
+    const { title, body } = req.body;
+    await BlogModel.create({
+      title,
+      body,
+      createdBy: req.user._id,
+      coverImageUrl: `uploads/${req.file.filename}`,
+    });
+  } catch (error) {
+    return res.redirect("/", { error });
+  }
   return res.redirect("/");
 };
 
 const getBlogDetails = async (req, res) => {
-  const blog = await BlogModel.findById(req.params.id).populate("createdBy");
-  const comments = await CommentModel.find({ blogId: req.params.id }).populate(
-    "createdBy"
-  );
-  return res.render("blog", {
-    blog: blog,
-    user: req.user,
-    comments: comments,
-  });
+  try {
+    const blog = await BlogModel.findById(req.params.id).populate("createdBy");
+    const comments = await CommentModel.find({
+      blogId: req.params.id,
+    }).populate("createdBy");
+    return res.render("blog", {
+      blog: blog,
+      user: req.user,
+      comments: comments,
+    });
+  } catch (error) {
+    return res.render("/");
+  }
 };
 const commnetsHandler = async (req, res) => {
-  const comment = CommentModel.create({
-    content: req.body.content,
-    blogId: req.params.blogId,
-    createdBy: req.user._id,
-  });
+  try {
+    const comment = await CommentModel.create({
+      content: req.body.content,
+      blogId: req.params.blogId,
+      createdBy: req.user._id,
+    });
+  } catch (error) {
+    return res.redirect("/");
+  }
+
   return res.redirect(`/blog/${req.params.blogId}`);
 };
-
 
 module.exports = {
   renderAddBlog,
   createNewBlog,
   getBlogDetails,
-  commnetsHandler
+  commnetsHandler,
 };

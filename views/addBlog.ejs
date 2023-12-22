@@ -9,15 +9,15 @@
     <form class="container my-3" method="post" action="/blog/addNew" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
-            <input type="text" class="form-control" id="title" name="title">
+            <input type="text" class="form-control" id="title" name="title" required>
           </div>
           <div class="mb-3">
             <label for="body" class="form-label">Body</label>
-            <textarea class="form-control" id="body" rows="10" name="body"></textarea>
+            <textarea class="form-control" id="body" rows="10" name="body" required></textarea>
           </div>
           <div class="mb-3">
             <label for="coverImageUrl" class="form-label">Cover Image</label>
-            <input  type="file" class="form-control" id="coverImageUrl" name="coverImageUrl">
+            <input  type="file" class="form-control" id="coverImageUrl" name="coverImageUrl" required>
           </div>
           <div class="mb-3">
            <button id="submit" class="btn btn-primary">Submit</button>

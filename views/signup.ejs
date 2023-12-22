@@ -10,25 +10,23 @@
     <div class="container">
       <form method="post" action="/user/signup">
         <div class="mb-3">
-            <label for="fullname" class="form-label"
-              >Fullname</label
-            >
-            <input
+          <label for="fullname" class="form-label">Fullname</label>
+          <input
             name="fullname"
-              type="text"
-              class="form-control"
-              id="fullname"
-            />
-          </div>
+            type="text"
+            class="form-control"
+            id="fullname"
+            required
+          />
+        </div>
         <div class="mb-3">
-          <label for="email" class="form-label"
-            >Email address</label
-          >
+          <label for="email" class="form-label">Email address</label>
           <input
             type="email"
             name="email"
             class="form-control"
             id="email"
+            required
           />
         </div>
         <div class="mb-3">
@@ -38,6 +36,7 @@
             name="password"
             class="form-control"
             id="password"
+            required
           />
         </div>
         <button type="submit" class="btn btn-primary">Sign Up</button>
